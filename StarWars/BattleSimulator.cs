@@ -14,7 +14,7 @@ namespace StarWars
         public BattleSimulator(Warrior[] warriors)
         {
             _warriors = warriors;
-            _goods = new Warrior[new Analytics(warriors).CountOfGood()];
+            _goods = new Warrior[new Analytics(warriors).CountOfGood(_warriors)];
             _evils = new Warrior[_warriors.Length - _goods.Length];
             int goodIndex = 0, evilIndex = 0;
             foreach (var warrior in _warriors)
@@ -31,14 +31,14 @@ namespace StarWars
             Warrior currentGood = null, currentEvil = null;
             while ((currentGood != null || (currentGood = GetRandomWarrior(_goods)) != null) && (currentEvil != null || (currentEvil = GetRandomWarrior(_evils)) != null))
             {
-                if (Compare(currentGood, currentEvil))
+                if (currentGood.IsStrongerThan(currentEvil))
                 {
                     currentGood.Power -= currentEvil.Power;
                     if (currentGood.Power <= 0)
                         currentGood = null;
                     currentEvil = null;
                 }
-                else if (Compare(currentEvil, currentGood))
+                else if(currentEvil.IsStrongerThan(currentGood))
                 {
                     currentEvil.Power -= currentGood.Power;
                     if (currentEvil.Power <= 0)
@@ -53,11 +53,6 @@ namespace StarWars
             }
 
             return currentGood ?? currentEvil;
-        }
-
-        bool Compare(Warrior a, Warrior b)
-        {
-            return (a.Power + (a.IsForceUser && !b.IsForceUser ? 2 : 0)) > (b.Power + (b.IsForceUser && !a.IsForceUser ? 2 : 0));
         }
 
         Warrior GetRandomWarrior(Warrior[] warriors)

@@ -33,5 +33,10 @@
             IsGood = isGood;
             IsForceUser = isForceUser;
         }
+
+        public bool IsStrongerThan(Warrior other)
+        {
+            return (Power + (IsForceUser && !other.IsForceUser ? 2 : 0)) > (other.Power + (other.IsForceUser && !IsForceUser ? 2 : 0));
+        }
     }
 }

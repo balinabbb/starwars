@@ -10,18 +10,22 @@ namespace StarWars
             return new Result(
                 DateTime.Parse(data[0]), 
                 data.Length > 2 ? data[1] : null, 
-                data.Length > 2 ? int.Parse(data[2]) : 0
+                data.Length > 2 ? int.Parse(data[2]) : 0,
+                data.Length > 2 && bool.Parse(data[3])
             );
         }
         public DateTime Date { get; }
         public string WarriorName { get; }
         public int WarriorPower { get; }
+        public bool GoodWin { get; }
 
-        Result(DateTime date, string warriorName, int warriorPower)
+        Result(DateTime date, string warriorName, 
+            int warriorPower, bool goodWin)
         {
             Date = date;
             WarriorName = warriorName;
             WarriorPower = warriorPower;
+            GoodWin = goodWin;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace StarWars
             using (var sw = new StreamWriter(ResultsFileName, true))
             {
                 if(winner != null)
-                    sw.WriteLine($"{DateTime.Now};{winner.Name};{winner.Power}");
+                    sw.WriteLine($"{DateTime.Now};{winner.Name};{winner.Power};{winner.IsGood}");
                 else
                     sw.WriteLine($"{DateTime.Now};Döntetlen");
             }

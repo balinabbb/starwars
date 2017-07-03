@@ -47,6 +47,11 @@ namespace StarWars
                         Console.ReadKey();
                         break;
                     case "3":
+                        var results = FileHandler.ReadResults();
+                        var resultAnalytics = new ResultAnalytics(results);
+                        resultAnalytics.AllAnalytics();
+                        Console.WriteLine("\n\n\nÜss le egy billentyűt a kilépéshez...");
+                        Console.ReadKey();
                         break;
                     case "4":
                         break;

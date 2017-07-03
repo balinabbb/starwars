@@ -2,6 +2,7 @@
 {
     class Warrior
     {
+        // test
         public static Warrior FromString(string s)
         {
             var data = s.Substring(1).Split('#', '/', '!');
